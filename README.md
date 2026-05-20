@@ -1,106 +1,72 @@
-# ⚡ ShopNow — 3-Tier E-Commerce App
+# ⚡ ShopNow — Dockerized 3-Tier E-Commerce Application
 
-A full-stack e-commerce application with React frontend, Node/Express backend, and PostgreSQL database.
+A full-stack e-commerce application built with **React, Node.js/Express, and PostgreSQL**, fully containerized using **Docker** and orchestrated with **Docker Compose**.
+
+---
+
+## 🚀 Tech Stack
+
+- React
+- Node.js / Express
+- PostgreSQL
+- Docker
+- Docker Compose
+- Nginx
+
+---
+
+## 🏗️ Architecture
+
+Frontend (React + Nginx) → Backend API (Express) → PostgreSQL Database
+
+---
+
+## ✨ Features
+
+- Multi-container Docker setup
+- Docker Compose orchestration
+- Multi-stage Docker builds
+- Nginx reverse proxy
+- JWT Authentication
+- Persistent PostgreSQL storage
+- Healthcheck-based startup sequencing
+
+---
 
 ## 📁 Project Structure
 
-```
-ecommerce/
-├── frontend/          # React (Tier 1 — Presentation)
-│   ├── public/
-│   └── src/
-│       ├── components/   # Navbar, ProductCard
-│       ├── context/      # AuthContext, CartContext
-│       ├── pages/        # Home, Cart, Orders, Login, Register
-│       ├── api.js        # Axios instance
-│       └── App.js        # Router
-│
-├── backend/           # Node/Express (Tier 2 — Application)
-│   ├── db/            # PostgreSQL connection + schema init
-│   ├── middleware/    # JWT auth middleware
-│   ├── routes/        # auth, products, cart, orders
-│   └── server.js      # Express app entry point
-│
-└── README.md
-```
-
-## 🚀 Quick Start (Without Docker)
-
-### Prerequisites
-- Node.js 18+
-- PostgreSQL 14+
-
-### 1. Set up PostgreSQL
 ```bash
-psql -U postgres -c "CREATE DATABASE ecommerce;"
+frontend/
+backend/
+docker-compose.yml
+README.md
 ```
 
-### 2. Backend
+---
+
+## ▶️ Run the Application
+
 ```bash
-cd backend
-cp .env.example .env        # edit DB credentials if needed
-npm install
-npm start
-# Server: http://localhost:5000
+docker compose up --build
 ```
 
-### 3. Frontend
+Access the application:
+
+- Frontend → http://localhost
+- Backend API → http://localhost:5000
+- PostgreSQL → localhost:5432
+
+---
+
+## 🔧 Useful Commands
+
 ```bash
-cd frontend
-npm install
-npm start
-# App: http://localhost:3000
+docker compose up -d
+docker compose down
+docker compose logs -f
+docker compose ps
 ```
 
-## 🔌 API Endpoints
+---
 
-| Method | Path | Auth | Description |
-|--------|------|------|-------------|
-| POST | /api/auth/register | — | Register user |
-| POST | /api/auth/login | — | Login, returns JWT |
-| GET | /api/auth/me | ✅ | Get current user |
-| GET | /api/products | — | List products (search, filter) |
-| GET | /api/products/:id | — | Single product |
-| GET | /api/products/meta/categories | — | All categories |
-| GET | /api/cart | ✅ | Get user's cart |
-| POST | /api/cart | ✅ | Add item to cart |
-| PUT | /api/cart/:id | ✅ | Update quantity |
-| DELETE | /api/cart/:id | ✅ | Remove item |
-| DELETE | /api/cart | ✅ | Clear cart |
-| GET | /api/orders | ✅ | Get user's orders |
-| POST | /api/orders/checkout | ✅ | Place order from cart |
-| GET | /api/health | — | Health check |
-
-## 🐳 Docker (Next Step)
-
-See `docker-compose.yml` once you create it. You'll need:
-- `backend/Dockerfile`
-- `frontend/Dockerfile`
-- `docker-compose.yml` at root
-
-## 🔑 Environment Variables
-
-### Backend `.env`
-```
-PORT=5000
-DB_HOST=localhost
-DB_PORT=5432
-DB_NAME=ecommerce
-DB_USER=postgres
-DB_PASSWORD=postgres
-JWT_SECRET=ecommerce_secret_key_2024
-FRONTEND_URL=http://localhost:3000
-```
-
-### Frontend `.env`
-```
-REACT_APP_API_URL=http://localhost:5000/api
-```
-
-## ✅ Features
-- User registration & login (JWT)
-- Product listing with search & category filter
-- Add to cart, update quantity, remove items
-- Checkout with stock validation (atomic transaction)
-- Order history
-- Auto-seeded product catalog (8 products)
+Muhammad Omair
